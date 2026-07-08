@@ -1,5 +1,14 @@
-from cog import BaseRunner, Input, Path
+import tempfile
+
+from cog import BaseModel, BaseRunner, Input, Path
 from PIL import Image, ImageFilter
+
+
+class Output(BaseModel):
+    image: Path
+    width: int
+    height: int
+    applied_effect: str
 
 
 class Runner(BaseRunner):
@@ -18,7 +27,7 @@ class Runner(BaseRunner):
             default="none",
             choices=["none", "blur", "sharpen", "grayscale"],
         ),
-    ) -> Path:
+    ) -> Output:
         """Resize the image and optionally apply an effect"""
         img = Image.open(image).convert("RGB")
         new_size = (int(img.width * scale), int(img.height * scale))
@@ -31,6 +40,13 @@ class Runner(BaseRunner):
         elif effect == "grayscale":
             img = img.convert("L")
 
-        output_path = Path("/tmp/output.png")
+        self.record_metric("output_pixels", new_size[0] * new_size[1])
+
+        output_path = Path(tempfile.mkdtemp()) / "output.png"
         img.save(output_path)
-        return output_path
+        return Output(
+            image=output_path,
+            width=new_size[0],
+            height=new_size[1],
+            applied_effect=effect,
+        )

@@ -26,3 +26,10 @@ deprecated), system_packages (APT), run (Dockerfile RUN karşılığı, kod
 görünmez), gpu/cuda, sdk_version. concurrency.max async predict()
 gerektiriyor. image anahtarı (r8.im/kullanici/model) cog push'un hedefini
 belirliyor — Docker imaj adı anatomisiyle aynı mantık.
+## Python API referans notları
+BaseRunner/run() güncel API (BasePredictor/predict deprecated). Yeni
+kullandıklarım: cog.BaseModel ile çok alanlı yapılandırılmış çıktı,
+tempfile.mkdtemp() ile güvenli çıktı yolu, self.record_metric() ile özel
+ölçümler. Bilgi düzeyinde: async run + @cog.concurrent, @streaming ile
+Iterator çıktısı, cog.Secret, CancelationException, Optional/Union/list
+girdi tipleri ve tip sınırlamaları.
