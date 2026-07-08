@@ -1,0 +1,5 @@
+input.jpg
+hub/
+*.pth
+__pycache__/
+.cog/
