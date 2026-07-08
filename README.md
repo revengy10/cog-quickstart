@@ -12,3 +12,10 @@ Docker temelim: https://github.com/revengy10/docker-egitimi
 ## Alt proje: image-tool/
 Input arayüz seçeneklerini (default, ge/le, choices) ve Path çıktısını
 uyguladığım görüntü işleme aracı. Detaylar: image-tool/README.md
+
+## Deploy notları
+Cog konteynerleri Docker'ın çalıştığı her yerde deploy edilebiliyor.
+cog serve ile tek komutta build+serve; --gpus all ile GPU erişimi;
+/openapi.json ile Input tanımlarından üretilen makine-okur API şeması;
+/health-check (STARTING/READY/BUSY/SETUP_FAILED/DEFUNCT) ile readiness
+probe; concurrency.max ile eşzamanlı istek sayısı.
