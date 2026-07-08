@@ -19,3 +19,10 @@ cog serve ile tek komutta build+serve; --gpus all ile GPU erişimi;
 /openapi.json ile Input tanımlarından üretilen makine-okur API şeması;
 /health-check (STARTING/READY/BUSY/SETUP_FAILED/DEFUNCT) ile readiness
 probe; concurrency.max ile eşzamanlı istek sayısı.
+
+## cog.yaml referans notları
+build altında: python_version, python_requirements (python_packages
+deprecated), system_packages (APT), run (Dockerfile RUN karşılığı, kod
+görünmez), gpu/cuda, sdk_version. concurrency.max async predict()
+gerektiriyor. image anahtarı (r8.im/kullanici/model) cog push'un hedefini
+belirliyor — Docker imaj adı anatomisiyle aynı mantık.
